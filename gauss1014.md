@@ -397,11 +397,11 @@ show 参数名;
 安装的客户端工具包含：
 gs_dump/gs_dumpall,gs_ktool,gs_loader,gs_restore以及gsql
 ### 5.2 安装步骤
-**步骤 1**&emsp;客户端解压缩到GSQL中  
-FTP://22.122.18.86:/patch/gaussdb/831/
-**GaussDB-Kernel_505.1.0_Kylin_64bit_Gsql_Ditributed.tar.gz     分布式GSQL包**
-**GaussDB-Kernel_505.1.0_Kylin_64bit_Gsql_Centralized.tar.gz    集中式GSQL包**
-**传送到对应目录**
+**步骤 1**&emsp;客户端解压缩到GSQL中。  
+FTP://22.122.18.86:/patch/gaussdb/831/  
+**GaussDB-Kernel_505.1.0_Kylin_64bit_Gsql_Ditributed.tar.gz     分布式GSQL包**  
+**GaussDB-Kernel_505.1.0_Kylin_64bit_Gsql_Centralized.tar.gz    集中式GSQL包**  
+**传送到对应目录**  
 ```
 mkdir /用户家目录/DBS-GaussDB-driver
 cd /用户家目录/DBS-GaussDB-driver
@@ -414,12 +414,12 @@ chmod -R 755 /用户家目录/DBS-GaussDB-driver/
 cd /用户家目录/DBS-GaussDB-driver/
 vi gsql_env.sh
 ```
-**修改第六行内容**
-**原文为**
+**修改第六行内容**  
+**原文为**  
 ```
 LOCAL_PATH=${0}
 ```
-**修改为**
+**修改为**  
 ```
 LOCAL_PATH=/用户家目录/DBS-GaussDB-driver
 ```
@@ -427,127 +427,127 @@ LOCAL_PATH=/用户家目录/DBS-GaussDB-driver
 cd /应用用户家目录/
 echo "source /用户家目录/DBS-GaussDB-driver/gsql_env.sh" >> .bash_profile
 ```
-**步骤2**&emsp;验证客户端版本信息 
+**步骤 2**&emsp;验证客户端版本信息。  
 ```
 gsql -V
 ```
-**步骤3**&emsp;验证数据库版本信息，确认与客户端工具版本保持一致
+**步骤 3**&emsp;验证数据库版本信息，确认与客户端工具版本保持一致。  
 ```
 gsql -d postgres -p XXXX -U 用户名 -W 密码 -ra
 ```
-连接进入会话后，查看版本：
+连接进入会话后，查看版本：  
 ```
 select version();
 ```
 
 ## 6 客户化
 ### 6.1 创建数据库
-集中式
-**步骤1**&emsp;登录云数据库GaussDB管理平台（TPOPS）
-**步骤2**&emsp;单击具体实例名称： 
-进入“实例管理”详情页：
-**步骤3**&emsp;选择“数据库管理 > 库管理”，当前页面即显示当前实例下所有非模板数据库。
-**步骤4**&emsp;单击“新建数据库”可进行数据库创建：
-- 数据库名称：数据库名称由1~63个字符组成，可以包含英文字母（a-z、A-Z）、数字（0-9）、下划线（_），不能以'pg'和数字开头，不能和模板数据库重名（模板数据库包括postgres、template0、template1、templatem）。
-- 数据库字符集：当前数据库字符集可选UTF8、SQL_ASCII、GBK、Latin1、GB18030、EUT_TW、EUT_KR、EUT_CN、EUT_JP。
-- 属主：当前数据库仅可选择默认属主root。
-- 数据库模板：仅支持template0。
-- 数据库排序集：默认设置为C，即使用标准ASCII字符集进行比较。
-- 数据库分类集：默认设置为C，即使用标准ASCII字符集进行分类。
-分布式
-在主数据库节点执行以下操作：
-<font color="blue">※：主数据库节点的确认，参考第10章附录中10.2.3 cm_ctl中“确认主节点”。</font>
-**步骤1**&emsp;以root用户登录主节点服务器
-**步骤2**&emsp;切换到Ruby用户
+#### **集中式**
+**步骤 1**&emsp;登录云数据库GaussDB管理平台（TPOPS）。  
+**步骤 2**&emsp;单击具体实例名称：  
+进入“实例管理”详情页：  
+**步骤 3**&emsp;选择“数据库管理 > 库管理”，当前页面即显示当前实例下所有非模板数据库。  
+**步骤 4**&emsp;单击“新建数据库”可进行数据库创建：  
+- 数据库名称：数据库名称由1~63个字符组成，可以包含英文字母（a-z、A-Z）、数字（0-9）、下划线（_），不能以'pg'和数字开头，不能和模板数据库重名（模板数据库包括postgres、template0、template1、templatem）。  
+- 数据库字符集：当前数据库字符集可选UTF8、SQL_ASCII、GBK、Latin1、GB18030、EUT_TW、EUT_KR、EUT_CN、EUT_JP。  
+- 属主：当前数据库仅可选择默认属主root。  
+- 数据库模板：仅支持template0。  
+- 数据库排序集：默认设置为C，即使用标准ASCII字符集进行比较。  
+- 数据库分类集：默认设置为C，即使用标准ASCII字符集进行分类。  
+#### **分布式**
+在主数据库节点执行以下操作：  
+<font color="blue">※：主数据库节点的确认，参考第10章附录中10.2.3 cm_ctl中“确认主节点”。</font>  
+**步骤 1**&emsp;以root用户登录主节点服务器。
+**步骤 2**&emsp;切换到Ruby用户。
 ```
 su – Ruby
 ```
-**步骤3**&emsp;初始换GaussDB环境
+**步骤 3**&emsp;初始化GaussDB环境。  
 ```
 source gauss_env_file
 ```
-**步骤4**&emsp;以root用户登录默认数据库postgres，创建数据库
+**步骤 4**&emsp;以root用户登录默认数据库postgres，创建数据库。  
 ```
 gsql -d postgres -p 8000 -r -U root -W XXXXXXXX
 create database 新建数据库名 owner=root dbcompatibility=’ORA’;
 ```
 ### 6.2 删除数据库
-**步骤1**&emsp;登录云数据库GaussDB管理平台（TPOPS）
-**步骤2**&emsp;单击具体实例名称： 
-进入“实例管理”详情页：
-**步骤3**&emsp;选择“数据库管理 > 库管理”，当前页面即显示当前实例下所有非模板数据库。
-**步骤4**&emsp;单击“删除”，输入“delete”。
-**步骤5**&emsp;单击“是”，可将新建的非模板数据库删除。
+**步骤 1**&emsp;登录云数据库GaussDB管理平台（TPOPS）。  
+**步骤 2**&emsp;单击具体实例名称：   
+进入“实例管理”详情页：  
+**步骤 3**&emsp;选择“数据库管理 > 库管理”，当前页面即显示当前实例下所有非模板数据库。  
+**步骤 4**&emsp;单击“删除”，输入“delete”。  
+**步骤 5**&emsp;单击“是”，可将新建的非模板数据库删除。  
 ### 6.3 创建用户
-**步骤1**&emsp;登录云数据库GaussDB管理平台（TPOPS）
-**步骤2**&emsp;单击具体实例名称： 
-进入“实例管理”详情页：
-**步骤3**&emsp;选择“数据库管理 > 用户管理”，前页面即显示当前实例下所有数据库用户（不包括root以外的系统用户）。
-**步骤4**&emsp;单击“创建用户账号”，填写用户名称、密码、确认密码，选择要赋予用户的权限类型，给用户授权数据库（可选）后，可创建新数据库用户。
+**步骤 1**&emsp;登录云数据库GaussDB管理平台（TPOPS）。  
+**步骤 2**&emsp;单击具体实例名称：  
+进入“实例管理”详情页：  
+**步骤 3**&emsp;选择“数据库管理 > 用户管理”，前页面即显示当前实例下所有数据库用户（不包括root以外的系统用户）。  
+**步骤 4**&emsp;单击“创建用户账号”，填写用户名称、密码、确认密码，选择要赋予用户的权限类型，给用户授权数据库（可选）后，可创建新数据库用户。  
 
 ### 6.4 删除用户
-**步骤1**&emsp;登录云数据库GaussDB管理平台（TPOPS）
-**步骤2**&emsp;单击具体实例名称： 
-进入“实例管理”详情页：
-**步骤3**&emsp;选择“数据库管理 > 用户管理”，前页面即显示当前实例下所有数据库用户（不包括root以外的系统用户）。
-**步骤4**&emsp;单击“更多 > 删除”，可删除数据库用户。输入“delete”确认后即可删除数据库用户。
+**步骤 1**&emsp;登录云数据库GaussDB管理平台（TPOPS）。  
+**步骤 2**&emsp;单击具体实例名称：  
+进入“实例管理”详情页：  
+**步骤 3**&emsp;选择“数据库管理 > 用户管理”，前页面即显示当前实例下所有数据库用户（不包括root以外的系统用户）。  
+**步骤 4**&emsp;单击“更多 > 删除”，可删除数据库用户。输入“delete”确认后即可删除数据库用户。  
  
 ### 6.5 用户授权
-在主数据库节点执行以下操作：
-<font color="blue">※：主数据库节点的确认，参考第10章附录中10.2.3 cm_ctl中“确认主节点”。</font>
-**步骤1**&emsp;以root用户登录任意一台数据库服务器
-**步骤2**&emsp;切换到Ruby用户
+在主数据库节点执行以下操作：  
+<font color="blue">※：主数据库节点的确认，参考第10章附录中10.2.3 cm_ctl中“确认主节点”。</font>  
+**步骤 1**&emsp;以root用户登录任意一台数据库服务器。  
+**步骤 2**&emsp;切换到Ruby用户。  
 ```
 su – Ruby
 ```
-**步骤3**&emsp;初始化GaussDB环境
+**步骤 3**&emsp;初始化GaussDB环境。  
 ```
 source gauss_env_file
 ```
-**步骤4**&emsp;以root用户登录默认数据库postgres，给用户赋CREATE权限
+**步骤 4**&emsp;以root用户登录默认数据库postgres，给用户赋CREATE权限。
 ```
 gsql -d postgres -p 8000 -r -U root -W XXXXXXXX
 ```
-登录后，在命令行输入以下SQL语句，给用户赋CREATE权限：
+登录后，在命令行输入以下SQL语句，给用户赋CREATE权限：  
 ```
 GRANT CREATE ON database 新建数据库名 to 新建用户名;
 ```
-以root用户登录新建的业务数据库，给业务用户赋权限：
+以root用户登录新建的业务数据库，给业务用户赋权限：  
 ```
 gsql -d 新建数据库名 -p 8000 -r -U root -W XXXXXXXX
 CREATE SCHEMA 新建用户名;
 GRANT CREATE ON SCHEMA PUBLIC TO 新建用户名;
 ```
 ### 6.6 撤销用户授权
-在主数据库节点执行以下操作：
-※：主数据库节点的确认，参考第10章附录中10.2.3 cm_ctl中“确认主节点”。
-**步骤1**&emsp;以root用户登录任意一台数据库服务器
-**步骤2**&emsp;切换到Ruby用户
+在主数据库节点执行以下操作：  
+※：主数据库节点的确认，参考第10章附录中10.2.3 cm_ctl中“确认主节点”。  
+**步骤 1**&emsp;以root用户登录任意一台数据库服务器。  
+**步骤 2**&emsp;切换到Ruby用户。  
 ```
 su – Ruby
 ```
-**步骤3**&emsp;初始换GaussDB环境
+**步骤 3**&emsp;初始化GaussDB环境。   
 ```
 source gauss_env_file
 ```
-**步骤4**&emsp;以root用户登录默认数据库postgres，给用户赋CREATE权限
+**步骤 4**&emsp;以root用户登录默认数据库postgres，给用户赋CREATE权限。  
 ```
 gsql -d postgres -p 8000 -r -U root -W XXXXXXXX
 ```
-登录后，在命令行输入以下SQL语句，给用户赋CREATE权限：
+登录后，在命令行输入以下SQL语句，给用户赋CREATE权限：  
 ```
 REVOKE CREATE ON database 新建数据库名 from 新建用户名;
 ```
-**步骤5**&emsp;以root用户登录新建的业务数据库，给业务用户赋权限：
+**步骤 5**&emsp;以root用户登录新建的业务数据库，给业务用户赋权限：  
 ```
 gsql -d 新建数据库名 -p 8000 -r -U root -W XXXXXXXX
 REVOKE CREATE ON SCHEMA PUBLIC from 新建用户名;
 ```
 
 ## 7 安装DRS-Node
-**步骤1**&emsp;以root用户登录待安装DRS的服务器。
-**步骤2**&emsp;挂载/data磁盘
-安装DRS-Node的/data目录需要至少100GB磁盘空间，考虑文件头额外占用空间，需挂载150GB空间：
+**步骤 1**&emsp;以root用户登录待安装DRS的服务器。  
+**步骤 2**&emsp;挂载/data磁盘。  
+安装DRS-Node的/data目录需要至少100GB磁盘空间，考虑文件头额外占用空间，需挂载150GB空间：  
 ```
 lvcreate -L 150G -n lv_drsdata rootvg
 mkfs.ext4 -F /dev/mapper/rootvg-lv_drsdata
@@ -556,8 +556,8 @@ echo -e "/dev/rootvg/lv_drsdata\t/data\text4\tdefaults\t0\t0" >> /etc/fstab
 mount -a
 df -h 
 ```
-**步骤3**&emsp;挂载/drs磁盘
-安装DRS-Node的/drs目录需要100GB磁盘空间：
+**步骤 3**&emsp;挂载/drs磁盘。  
+安装DRS-Node的/drs目录需要100GB磁盘空间：  
 ```
 lvcreate -L 100G -n lv_drsdrs rootvg
 mkfs.ext4 -F /dev/mapper/rootvg-lv_drsdrs
@@ -566,17 +566,17 @@ echo -e "/dev/rootvg/lv_drsdrs\t/data\text4\tdefaults\t0\t0" >> /etc/fstab
 mount -a
 df -h 
 ```
-**步骤4**&emsp;将DRS-Node软件包上传到/data文件夹中。
-**步骤5**&emsp;执行以下命令，进入/data
+**步骤 4**&emsp;将DRS-Node软件包上传到/data文件夹中。  
+**步骤 5**&emsp;执行以下命令，进入/data。  
 ```
 cd /data
 ```
-**步骤6**&emsp;执行以下命令，解压并进入DRS-Node文件夹，其中DRS-Node-*版本号以实际为准。
+**步骤 6**&emsp;执行以下命令，解压并进入DRS-Node文件夹，其中DRS-Node-*版本号以实际为准。  
 ```
 tar -xvf DRS-Node-*.tar.gz
 cd DRS-Node-*
 ```
-**步骤7**&emsp;执行如下命令，配置install.conf文件。
+**步骤 7**&emsp;执行如下命令，配置install.conf文件。  
 修改蓝色字体部分的内容：
 metaDB_address：填写实际元数据库节点的IP地址(通常与DRS-Service在一个节点，30100为默认端口，保持不变)；
 metaDB_drs_password：元数据库drs用户的密码；
@@ -596,7 +596,7 @@ node_ip = 192.168.0.60                                 # 节点IP地址
 [system] 
 swap_space = 2G                                        # swap分区大小
 ```
-**步骤8**&emsp;安装前环境预检查，执行以下命令，检查安装环境。
+**步骤 8**&emsp;安装前环境预检查，执行以下命令，检查安装环境。  
 sh precheck_env.sh
 ```
 ================== START TO PRECHECK ==================== 
@@ -626,7 +626,7 @@ Item                                    Actual/Recommand
 3.2 Diskspace Check: /data:                    1.8T/2.5T 
 =================== PRECHECK END ======================= 
 ```
-**步骤9**&emsp;执行以下命令，运行安装脚本。
+**步骤 9**&emsp;执行以下命令，运行安装脚本。  
 sh install.sh
 ```
 Precheck environment begin. 
@@ -709,39 +709,39 @@ touch: cannot touch '/data/drsTouchLog': Permission denied
 deploy drs node success 
 ==================== DEPLOY DRS NODE FINISHED ====================
 ```
-**步骤10**&emsp;补熵操作
-操作系统应包含Haveged用于补充系统熵值，防止加密等操作因熵值不足导致系统不可用：检查系统是否安装Haveged软件
+**步骤 10**&emsp;补熵操作。  
+操作系统应包含Haveged用于补充系统熵值，防止加密等操作因熵值不足导致系统不可用：检查系统是否安装Haveged软件：  
 ```
 Haveged –help
 ```
-如果报错说明未安装，安装命令如下：
+如果报错说明未安装，安装命令如下：  
 ```
 yum install -y Haveged
 ```
-检查系统是否启动haveged服务：
+检查系统是否启动haveged服务：  
 ```
 systemctl status haveged
 ```
-启动服务：
+启动服务：  
 ```
 systemctl start haveged
 ```
 
 ## 8 卸载DRS-Node服务
-**步骤1**&emsp;以root用户登录待安装DRS的服务器。
-**步骤2**&emsp;执行以下命令，进入/data
+**步骤 1**&emsp;以root用户登录待安装DRS的服务器。  
+**步骤 2**&emsp;执行以下命令，进入/data。
 ```
 cd /data
 ```
-**步骤3**&emsp;进入DRS-Node文件夹，其中DRS-Node-*版本号以实际为准。
+**步骤 3**&emsp;进入DRS-Node文件夹，其中DRS-Node-*版本号以实际为准。  
 ```
 cd DRS-Node-*
 ```
-**步骤4**&emsp;执行以下命令，运行卸载脚本。
+**步骤 4**&emsp;执行以下命令，运行卸载脚本。  
 ```
 sh uninstall.sh
 ```
-回显信息如下所示：
+回显信息如下所示：  
 ```
 # sh uninstall.sh  
 [INFO] --- node agent crontab cleaned 
@@ -753,34 +753,34 @@ sh uninstall.sh
 [INFO] --- remove files success 
 [INFO] --- uninstall drs finished
 ```
-- DRS-Node服务卸载后，Node心跳两分钟后会自动过期，如果需要重新安装，建议在卸载两分钟后再进行重新安装。
-- 若存在多Node节点部署，请在每个节点上执行相同的卸载操作。
-----结束
+- DRS-Node服务卸载后，Node心跳两分钟后会自动过期，如果需要重新安装，建议在卸载两分钟后再进行重新安装。  
+- 若存在多Node节点部署，请在每个节点上执行相同的卸载操作。  
+----结束  
 
 ## 9 安装Monitor-Agent
-**步骤1**&emsp;以root用户登录待安装DRS-Node的服务器。
-**步骤2**&emsp;将DRS-Node软件包上传到/data文件夹中。
+**步骤 1**&emsp;以root用户登录待安装DRS-Node的服务器。  
+**步骤 2**&emsp;将DRS-Node软件包上传到/data文件夹中。  
 Monitor-Agent-*.tar.gz
-**步骤3**&emsp;执行以下命令，进入/data
+**步骤 3**&emsp;执行以下命令，进入/data。  
 ```
 cd /data
 ```
-**步骤4**&emsp;执行以下命令，解压并进入Monitor-Agent文件夹，其中Monitor-Agent-*版本号以实际为准。
+**步骤 4**&emsp;执行以下命令，解压并进入Monitor-Agent文件夹，其中Monitor-Agent-*版本号以实际为准。  
 ```
 tar -xvf Monitor-Agent-*.tar.gz
 cd Monitor-Agent-*
 ```
-**步骤5**&emsp;执行以下命令，运行install.sh脚本。
-安装脚本能够自动识别当前机器已部署的组件：
-以下部分需要手动输入信息：
-please input database ip:port [default: 127.0.0.1:30100]:(输入三台元数据库IP地址:端口号，使用英文逗号隔开)
-please input platform drs user[default:drs]:  (输入回车，选择默认用户drs)；
-please input platform drs password:     (输入元数据库drs用户登录密码，即安装DRS-Node时install.conf配置的metaDB_drs_password)        
-Retype password:    (再次输入元数据库drs用户登录密码) 
+**步骤 5**&emsp;执行以下命令，运行install.sh脚本。  
+安装脚本能够自动识别当前机器已部署的组件：  
+以下部分需要手动输入信息：  
+please input database ip:port [default: 127.0.0.1:30100]:(输入三台元数据库IP地址:端口号，使用英文逗号隔开)  
+please input platform drs user[default:drs]:  (输入回车，选择默认用户drs)；  
+please input platform drs password:     (输入元数据库drs用户登录密码，即安装DRS-Node时install.conf配置的metaDB_drs_password)  
+Retype password:    (再次输入元数据库drs用户登录密码)   
 ```
 sh install.sh
 ```
-回显信息如下所示
+回显信息如下所示：  
 ```
 [root@host-172-16-11-98 Monitor-Agent-2.23.07.222]# sh install.sh  
 <13>Oct 30 19:18:50 DRS-Monitor-agent[533308]: [DRSS] execute install DRS-Monitor-agent script. 
@@ -885,16 +885,16 @@ INFO: Connect complete. ID: f245e849-44c2-4cee-908e-30316649a276
 ----结束
 
 ## 10 卸载Monitor-Agent
-**步骤1**&emsp;以root用户登录待安装DRS-Node的服务器。
-**步骤2**&emsp;执行以下命令，进入/data
+**步骤 1**&emsp;以root用户登录待安装DRS-Node的服务器。  
+**步骤 2**&emsp;执行以下命令，进入/data。  
 ```
 cd /data
 ```
-**步骤3**&emsp;执行以下命令，运行install.sh脚本。
+**步骤 3**&emsp;执行以下命令，运行install.sh脚本。  
 ```
 sh uninstall.sh
 ```
-回显信息如下所示：
+回显信息如下所示：  
 ```
 [root@host-172-16-110-234 Monitor-Agent]# sh uninstall.sh  
 2023-03-28 15:09:07 --- uninstall crontab 
@@ -909,96 +909,101 @@ kill monitor Ruby     2312432       1  0 Mar17 ?        00:23:29 java -jar monit
 
 ### 11.2 常用工具&运维命令
 #### 11.2.1 gsql
-连接数据库：
+连接数据库：  
 ```
 gsql -d <database-name> -p <port-number> -U <user-name> -W <password> -r
 ```
-查看gsql内核版本：
+查看gsql内核版本：  
 ```
 gsql -V
 ```
-进入gsql连接数据库后常用命令：
-\l :列出所有数据库的名称、所有者、字符集编码以及使用权限；
-\dt：列出当前数据库的所有用户表；命令后面加表名可以确认该表是否存在；
-\d+：列出当前数据库的所有表，视图，序列；命令后面加对象名可以确认该表是否存在；
-\i sql语句文件：执行一个SQL脚本文件
+进入gsql连接数据库后常用命令：  
+\l :列出所有数据库的名称、所有者、字符集编码以及使用权限；  
+\dt：列出当前数据库的所有用户表；命令后面加表名可以确认该表是否存在；  
+\d+：列出当前数据库的所有表，视图，序列；命令后面加对象名可以确认该表是否存在；  
+\i sql语句文件：执行一个SQL脚本文件。  
 #### 11.2.2 gs_om
-数据库维护工具；
-启动整个集群数据库实例：gs_om -t start
-停止整个集群数据库实例：gs_om -t stop
-强制停止整个集群数据库实例：gs_om stop -mi
-启动集群中的单个数据库:gs_om -t start -h <hostname or hostip>
-停止集群中的单个数据库实例:gs_om -t stop -h <hostname or hostip>
-重启数据库实例：gs_om -t restart
-查询数据库实例状态：gs_om -t status -h <hostname or hostip>
+数据库维护工具；  
+启动整个集群数据库实例：gs_om -t start  
+停止整个集群数据库实例：gs_om -t stop  
+强制停止整个集群数据库实例：gs_om stop -mi  
+启动集群中的单个数据库:gs_om -t start -h <hostname or hostip>  
+停止集群中的单个数据库实例:gs_om -t stop -h <hostname or hostip>  
+重启数据库实例：gs_om -t restart  
+查询数据库实例状态：gs_om -t status -h <hostname or hostip>  
 #### 11.2.3 cm_ctl
-统一集群管理工具；
-查询集群状态：
+统一集群管理工具；  
+查询集群状态：  
 ```
 cm_ctl query -Cvipd
 ```
-确认主节点：
-集中式：
-查看” [  Datanode State   ]”部分的输出，State为”Primary”的Node即为主节点
+确认主节点：  
+集中式：  
+查看” [  Datanode State   ]”部分的输出，State为”Primary”的Node即为主节点  
  
-分布式：
-查看“[ Central Coordinator State  ]”部分的输出，连接该台CN即可：
+分布式：  
+查看“[ Central Coordinator State  ]”部分的输出，连接该台CN即可：  
  
-启动集群或者集群的单个节点：
+启动集群或者集群的单个节点：  
 ```
 cm_ctl start -z <AZ-NAME> -n <NODE_ID>
 ```
-※：NODE_ID可以从cm_ctl query -Cvipd查询结果中得知
-停止集群或者集群的单个节点：
+※：NODE_ID可以从cm_ctl query -Cvipd查询结果中得知  
+停止集群或者集群的单个节点：  
 ```
 cm_ctl stop -z <AZ-NAME> -n <NODE_ID>
 ```
-※：NODE_ID可以从cm_ctl query -Cvipd查询结果中得知
+※：NODE_ID可以从cm_ctl query -Cvipd查询结果中得知  
 #### 11.2.4 进入沙箱
-执行命令：chroot /var/chroot，进入沙箱
-依次执行以下命令：
+执行命令：chroot /var/chroot，进入沙箱。  
+依次执行以下命令：  
 ```
 source /etc/profile
 source /home/Ruby/.bashrc
 source /home/Ruby/gauss_env_file
 ````
 #### 11.2.5 gs_guc
-使用该工具，需要先进入沙箱。
+使用该工具，需要先进入沙箱。  
 
-查看GUC参数：
-
+查看GUC参数：  
+```
 gs_guc check -Z datanode -N all -I all -c “参数名” –集中式
 gs_guc check -Z datanode -Z coordinator -N all -I all -c “参数名” –分布式
-
-修改GUC参数；
+```
+修改GUC参数；  
 
 修改POSTMASTER类型参数：
+```
 gs_guc set -Z datanode -N all -I all -c “参数名=参数值” –集中式
 gs_guc set -Z datanode -Z coordinator -N all -I all -c “参数名=参数值” –分布式
-修改后需要重启数据库：
+```
+修改后需要重启数据库：  
 ```
 gs_om -t start
 gs_om -t stop
 ```
 修改SIGHUP等其它类型参数：
+```
 gs_guc reload -Z datanode -N all -I all -c “参数名=参数值” –集中式
 gs_guc reload -Z datanode -Z coordinator -N all -I all -c “参数名=参数值” –分布式
-
+```
 修改hba.conf安全访问控制策略：
+```
 gs_guc set/reload -Z datanode -N all -I all -h “host/local <database-name>/all  <user-name>/all <IP/Port> < authmehod-options>” –集中式
 gs_guc set/reload -Z coordinator -N all -I all -h “host/local <database-name>/all  <user-name>/all <IP/Port> < authmehod-options>” –分布式
 authmehod-options可选值：trust/sh256/md5/cert/gss/reject
+```
 #### 11.2.6 gs_collector
-使用该工具，需要先进入沙箱。
+使用该工具，需要先进入沙箱。  
 
-默认收集GaussDB的系统信息：
+默认收集GaussDB的系统信息：  
 ```
 gs_collector --begin-time="20240617 10:00" --end-time="20240617 11:00"
 ```
-此时会收集System,Database系统表/系统视图,Log,Config信息，并存放到$GAUSSLOG目录下。
+此时会收集System,Database系统表/系统视图,Log,Config信息，并存放到$GAUSSLOG目录下。  
 
-收集Coredump,Gstack信息：
-先配置config文件，内容如下：
+收集Coredump,Gstack信息：  
+先配置config文件，内容如下：  
 ```
 {
     "Collect":
@@ -1008,11 +1013,11 @@ gs_collector --begin-time="20240617 10:00" --end-time="20240617 11:00"
     ]
 }
 ```
-CoreDump类型，不需要指定Interval和Count
+CoreDump类型，不需要指定Interval和Count。  
 ```
 gs_collector --begin-time="20240617 10:00" --end-time="20240617 11:00" -o /home/Ruby/coredump -C /home/Ruby/coredump/collector.conf
 ```
-注：这里-o和-C指定的路径是指沙箱里的目录，即进入沙箱后创建的目录。
+注：这里-o和-C指定的路径是指沙箱里的目录，即进入沙箱后创建的目录。  
 
 
 
