@@ -120,8 +120,8 @@ free -g
 ```
 回显结果如下：
 ```
-total        used        free      shared  buff/cache   available
-Mem:       30           8           2          12      19           5
+             total       used        free       shared     buff/cache   available
+Mem:         30          8           2          12         19           5
 Swap:        0           0           0
 ```
 
