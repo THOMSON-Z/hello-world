@@ -577,11 +577,13 @@ tar -xvf DRS-Node-*.tar.gz
 cd DRS-Node-*
 ```
 **步骤 7**&emsp;执行如下命令，配置install.conf文件。  
-修改蓝色字体部分的内容：
-metaDB_address：填写实际元数据库节点的IP地址(通常与DRS-Service在一个节点，30100为默认端口，保持不变)；
-metaDB_drs_password：元数据库drs用户的密码；
-node_ip：当前节点的IP地址
+修改蓝色字体部分的内容：  
+metaDB_address：填写实际元数据库节点的IP地址(通常与DRS-Service在一个节点，30100为默认端口，保持不变)；  
+metaDB_drs_password：元数据库drs用户的密码；  
+node_ip：当前节点的IP地址。  
+```
 vim install.conf
+```
 ```
 [meta db] 
 metaDB_engine = gaussdb 
