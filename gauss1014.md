@@ -77,7 +77,7 @@ source /etc/profile
 ```
 vi /etc/locale.conf
 ```
-**步骤 6**&emsp;修改参数“LANG”的值为en_US.UTF-8。
+**步骤 6**&emsp;修改参数“LANG”的值为en_US.UTF-8。  
 **步骤 7**&emsp;执行以下命令，确保安装的字符集生效：
 ```
 source /etc/ locale.conf
