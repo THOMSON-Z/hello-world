@@ -32,19 +32,19 @@ dd if=/dev/zero of=/dev/vdb bs=512k count=20
 
 ### 2.4 配置操作系统防火墙
 需在防火墙关闭的状态下进行安装，关闭防火墙操作步骤如下。  
-**步骤1**&emsp;执行以下命令，检查防火墙是否关闭。  
+**步骤 1**&emsp;执行以下命令，检查防火墙是否关闭。  
 ```
 systemctl status firewalld
 ```
 - 若防火墙状态显示为active (running)，则表示防火墙未关闭，请执行步骤2。
 - 若防火墙状态显示为inactive (dead)，则表示防火墙已关闭，无需再关闭防火墙。
 
-**步骤2**&emsp;执行以下命令，关闭防火墙并禁止开机启动。  
+**步骤 2**&emsp;执行以下命令，关闭防火墙并禁止开机启动。  
 ```
 systemctl stop firewalld.service
 systemctl disable firewalld.service
 ```
-**步骤3**&emsp;修改/etc/selinux/config文件中的“SELINUX”值为“permissive”  
+**步骤 3**&emsp;修改/etc/selinux/config文件中的“SELINUX”值为“permissive”  
 1. 使用vi打开config文件
 ```
  vi /etc/selinux/config 
@@ -63,22 +63,22 @@ systemctl start iptables.service
 
 ### 2.6 设置字符集参数
 将各主机的字符集设置为相同的字符集。  
-**步骤1**&emsp;vi打开profile文件。  
+**步骤 1**&emsp;vi打开profile文件。  
 ```
 vi /etc/profile
 ```
-**步骤2**&emsp;在/etc/profile文件中添加"export LANG=en_US.UTF-8"。
-**步骤3**&emsp;执行:wq保存并退出修改。
-**步骤4**&emsp;设置/etc/profile生效。 
+**步骤 2**&emsp;在/etc/profile文件中添加"export LANG=en_US.UTF-8"。
+**步骤 3**&emsp;执行:wq保存并退出修改。
+**步骤 4**&emsp;设置/etc/profile生效。 
 ```
 source /etc/profile
 ```
-**步骤5**&emsp;vi打开/etc/locale.conf文件。
+**步骤 5**&emsp;vi打开/etc/locale.conf文件。
 ```
 vi /etc/locale.conf
 ```
-**步骤6**&emsp;修改参数“LANG”的值为en_US.UTF-8。
-**步骤7**&emsp;执行以下命令，确保安装的字符集生效：
+**步骤 6**&emsp;修改参数“LANG”的值为en_US.UTF-8。
+**步骤 7**&emsp;执行以下命令，确保安装的字符集生效：
 ```
 source /etc/ locale.conf
 ```
@@ -86,14 +86,14 @@ source /etc/ locale.conf
 ### 2.7 设置时钟源
 该步骤要保证各时间点的时钟源同步，可以配置chrony或者ntpd时间同步。  
 使用Chrony配置时间同步：  
-**步骤1**&emsp;以root用户登录到待配置时间同步的所有服务器节点。
-**步骤2**&emsp;键入“chrony”并连按两次“Tab”键观察，检查是否安装了chrony。
+**步骤 1**&emsp;以root用户登录到待配置时间同步的所有服务器节点。
+**步骤 2**&emsp;键入“chrony”并连按两次“Tab”键观察，检查是否安装了chrony。
 - 若显示chronyc和chronyd，则表示已经安装了chrony。继续执行后续步骤。
 - 若未显示则表示当前未安装chrony，执行以下命令进行安装。 
 ```
 yum install chrony -y
 ```
-**步骤3**&emsp;执行以下命令，修改客户端配置。
+**步骤 3**&emsp;执行以下命令，修改客户端配置。
 1. 使用vi命令编辑客户端的/etc/chrony.conf文件：
 ```
 vi /etc/chrony.conf
@@ -104,17 +104,17 @@ vi /etc/chrony.conf
 ```
 systemctl restart chronyd
 ```
-**步骤4**&emsp;执行以下命令，配置后检查。
+**步骤 4**&emsp;执行以下命令，配置后检查。
 ```
 chronyc sources -v
 ```
 查看时钟源列表，列表中有配置的时钟源服务器IP即可。  
 关闭swap交换内存  
-**步骤5**&emsp;执行以下步骤，临时关闭交换内存。
+**步骤 5**&emsp;执行以下步骤，临时关闭交换内存。
 ```
 swapoff -a
 ```
-**步骤6**&emsp;验证swap是否关闭：
+**步骤 6**&emsp;验证swap是否关闭：
 ```
 free -g
 ```
@@ -126,8 +126,8 @@ Swap:        0           0           0
 ```
 
 ### 2.8 设置网卡MTU值
-**步骤1**&emsp;执行命令ifconfig，查看IP地址绑定的网卡，如eth0。
-**步骤2**&emsp;执行以下命令，查看与IP地址绑定的网卡后显示的MTU的值。 
+**步骤 1**&emsp;执行命令ifconfig，查看IP地址绑定的网卡，如eth0。  
+**步骤 2**&emsp;执行以下命令，查看与IP地址绑定的网卡后显示的MTU的值。  
 ```
 ifconfig eth0 | grep mtu 
 ```
@@ -135,26 +135,26 @@ ifconfig eth0 | grep mtu
 ```
 eth0: flags=4163 mtu 1500
 ```
-**步骤3**&emsp;如回显MTU值为1500，本项操作到此结束；否则继续步骤4
-**步骤4**&emsp;执行以下命令，打开文件ifcfg-*。 
+**步骤 3**&emsp;如回显MTU值为1500，本项操作到此结束；否则继续步骤4  
+**步骤 4**&emsp;执行以下命令，打开文件ifcfg-*。  
 ```
 vi /etc/sysconfig/network-scripts/ifcfg-*
 ```
-**步骤5**&emsp;按“i”进入编辑模式，添加如下语句，设置网卡MTU值，以设置MTU为1500为例。 
+**步骤 5**&emsp;按“i”进入编辑模式，添加如下语句，设置网卡MTU值，以设置MTU为1500为例。  
 ```
 MTU=1500
 ```
-**步骤6**&emsp;保存并关闭文件。
+**步骤 6**&emsp;保存并关闭文件。  
 ```
 :wq!
 ```
-**步骤7**&emsp;执行以下命令，重启网络。
+**步骤 7**&emsp;执行以下命令，重启网络。  
 ```
 service network restart
 ```
 
 ### 2.9 安装Expect
-**步骤1**&emsp;执行以下命令，检查是否安装了Expect。
+**步骤 1**&emsp;执行以下命令，检查是否安装了Expect。  
 ```
 expect -v 
 ```
@@ -162,16 +162,16 @@ expect -v
 ```
 expect version 5.45.4
 ```
-**步骤2**&emsp;若没有出现Expect版本，或者提示命令不存在，需执行以下命令进行安装。
+**步骤 2**&emsp;若没有出现Expect版本，或者提示命令不存在，需执行以下命令进行安装。  
 ```
 yum install expect -y
 ```
-**步骤3**&emsp;检查软件是否安装成功。
+**步骤 3**&emsp;检查软件是否安装成功。  
 ```
 expect -v
 ```
 ### 2.10 检查OpenSSH
-**步骤1**&emsp;执行以下命令，检查是否安装了OpenSSH工具。
+**步骤 1**&emsp;执行以下命令，检查是否安装了OpenSSH工具。  
 ```
 ssh -V 
 ```
@@ -179,55 +179,55 @@ ssh -V
 ```
 OpenSSH_8.2p1, OpenSSL 1.1.1f 31 Mar 2020
 ```
-**步骤2**&emsp;若没有出现OpenSSH版本，或者提示命令不存在，需执行以下命令进行安装。
+**步骤 2**&emsp;若没有出现OpenSSH版本，或者提示命令不存在，需执行以下命令进行安装。  
 ```
 yum -y install openssh-server
 ```
-**步骤3**&emsp;安装完成后，执行以下命令启动OpenSSH服务。
+**步骤 3**&emsp;安装完成后，执行以下命令启动OpenSSH服务。  
 ```
 systemctl start sshd
 ```
 ### 2.11 配置 sshd_config
-**步骤1**&emsp;使用vi打开/etc/ssh/sshd_config文件。
+**步骤 1**&emsp;使用vi打开/etc/ssh/sshd_config文件。  
 ```
 vi /etc/ssh/sshd_config
 ```
-**步骤2**&emsp;设置GSSAPIAuthentication参数为no。
+**步骤 2**&emsp;设置GSSAPIAuthentication参数为no。  
 ```
 GSSAPIAuthentication no
 ```
-**步骤3**&emsp;保存并关闭文件。
+**步骤 3**&emsp;保存并关闭文件。  
 ```
 :wq!
 ```
-**步骤4**&emsp;重启SSH服务。 
+**步骤 4**&emsp;重启SSH服务。  
 ```
 systemctl restart sshd.service
 ```
 ### 2.12 设置 umask
-**步骤1**&emsp;执行如下指令，查看umask回显值。
+**步骤 1**&emsp;执行如下指令，查看umask回显值。  
 ```
 umask
 ```
 若回显小于等于0022，表示umask设置正确。  
 若回显大于0022，请执行后续步骤，设置umask。  
-**步骤2**&emsp;执行如下命令，打开bashrc文件。
+**步骤 2**&emsp;执行如下命令，打开bashrc文件。  
 ```
 vi /etc/bashrc
 ```
-**步骤3**&emsp;bashrc文件的最下方增加一行，使umask的值等于0022。
+**步骤 3**&emsp;bashrc文件的最下方增加一行，使umask的值等于0022。  
 ```
 umask 0022
 ```
-**步骤4**&emsp;保存并关闭文件。
+**步骤 4**&emsp;保存并关闭文件。  
 ```
 :wq!
 ```
-**步骤5**&emsp;执行如下命令，使umask修改生效。 
+**步骤 5**&emsp;执行如下命令，使umask修改生效。  
 ```
 source /etc/bashrc
 ```
-**步骤6**&emsp;再次执行umask命令，回显等于0022表示设置umask成功。
+**步骤 6**&emsp;再次执行umask命令，回显等于0022表示设置umask成功。  
 
 ## 3 主机纳管
 ### 3.1 添加机房
