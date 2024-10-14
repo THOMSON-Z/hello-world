@@ -67,9 +67,9 @@ systemctl start iptables.service
 ```
 vi /etc/profile
 ```
-**步骤 2**&emsp;在/etc/profile文件中添加"export LANG=en_US.UTF-8"。
-**步骤 3**&emsp;执行:wq保存并退出修改。
-**步骤 4**&emsp;设置/etc/profile生效。 
+**步骤 2**&emsp;在/etc/profile文件中添加"export LANG=en_US.UTF-8"。  
+**步骤 3**&emsp;执行:wq保存并退出修改。  
+**步骤 4**&emsp;设置/etc/profile生效。  
 ```
 source /etc/profile
 ```
@@ -89,7 +89,7 @@ source /etc/ locale.conf
 **步骤 1**&emsp;以root用户登录到待配置时间同步的所有服务器节点。  
 **步骤 2**&emsp;键入“chrony”并连按两次“Tab”键观察，检查是否安装了chrony。  
 - 若显示chronyc和chronyd，则表示已经安装了chrony。继续执行后续步骤。
-- 若未显示则表示当前未安装chrony，执行以下命令进行安装。 
+- 若未显示则表示当前未安装chrony，执行以下命令进行安装。   
 ```
 yum install chrony -y
 ```
