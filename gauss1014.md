@@ -5,21 +5,21 @@
 ## 2 DB 初始化
 ### 2.1 查看系统配置
 !!! danger
-	- 以下动作需以root用户进行操作，操作完成后请及时登出root用户，避免误操作。
-	- <font color="blue">**该节操作需要在所有实例节点进行。**</font>
-
-该版本的GaussDB最低要求系统配置为8C64G，可通过以下命令分别查看CPU核数以及内存大小：
+	- 以下动作需以root用户进行操作，操作完成后请及时登出root用户，避免误操作。  
+	- <font color="blue">**该节操作需要在所有实例节点进行。**</font>  
+  
+该版本的GaussDB最低要求系统配置为8C64G，可通过以下命令分别查看CPU核数以及内存大小：  
 ```
 free -g
 lscpu
 ```
-如果系统配置不满足该要求，需要增加CPU核数以及内存扩容。
+如果系统配置不满足该要求，需要增加CPU核数以及内存扩容。  
 
 ### 2.2 查看磁盘空间
-GaussDB支持使用SSD盘作为数据库的主存储设备，支持SAS接口和NVME协议的SSD盘。
-<font color="blue">**数据盘要求独立未被使用且至少为300GB**</font>，若小于可能导致实例创建失败。
-<font color="blue">**lsblk & vgs查看是否有空间大于300GB且未被使用的独立块设备；**</font>
-※：若存在与上述块设备关联的逻辑卷rootvg，需要解绑，以块设备/dev/sdb为例：
+GaussDB支持使用SSD盘作为数据库的主存储设备，支持SAS接口和NVME协议的SSD盘。  
+<font color="blue">**数据盘要求独立未被使用且至少为300GB**</font>，若小于可能导致实例创建失败。  
+<font color="blue">**lsblk & vgs查看是否有空间大于300GB且未被使用的独立块设备；**</font>  
+※：若存在与上述块设备关联的逻辑卷rootvg，需要解绑，以块设备/dev/sdb为例：  
 ```
 vgreduce rootvg /dev/vdb
 pvremove /dev/vdb
