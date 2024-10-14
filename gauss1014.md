@@ -4,7 +4,7 @@
 
 ## 2 DB 初始化
 ### 2.1 查看系统配置
-!!! danger
+!!! danger  
 	- 以下动作需以root用户进行操作，操作完成后请及时登出root用户，避免误操作。  
 	- <font color="blue">**该节操作需要在所有实例节点进行。**</font>  
   
@@ -27,25 +27,25 @@ dd if=/dev/zero of=/dev/vdb bs=512k count=20
 ```
 
 ### 2.3 执行自动化脚本
-执行以下shell脚本，完成 2.4\~2.13 的检查项配置：
-【脚本】
-<font color="blue">**执行完成并确认无问题后，DB初始化完成；若有问题，参照 2.4~2.13 中对应章节进行处理。**</font>	
+执行以下shell脚本，完成 2.4\~2.13 的检查项配置：  
+【脚本】  
+<font color="blue">**执行完成并确认无问题后，DB初始化完成；若有问题，参照 2.4~2.13 中对应章节进行处理。**</font>  
 
 ### 2.4 配置操作系统防火墙
-需在防火墙关闭的状态下进行安装，关闭防火墙操作步骤如下。
-**步骤1**&emsp;执行以下命令，检查防火墙是否关闭。
+需在防火墙关闭的状态下进行安装，关闭防火墙操作步骤如下。  
+**步骤1**&emsp;执行以下命令，检查防火墙是否关闭。  
 ```
 systemctl status firewalld
 ```
 - 若防火墙状态显示为active (running)，则表示防火墙未关闭，请执行步骤2。
 - 若防火墙状态显示为inactive (dead)，则表示防火墙已关闭，无需再关闭防火墙。
 
-**步骤2**&emsp;执行以下命令，关闭防火墙并禁止开机启动。
+**步骤2**&emsp;执行以下命令，关闭防火墙并禁止开机启动。  
 ```
 systemctl stop firewalld.service
 systemctl disable firewalld.service
 ```
-**步骤3**&emsp;修改/etc/selinux/config文件中的“SELINUX”值为“permissive”
+**步骤3**&emsp;修改/etc/selinux/config文件中的“SELINUX”值为“permissive”  
 1. 使用vi打开config文件
 ```
  vi /etc/selinux/config 
@@ -57,14 +57,14 @@ SELINUX=permissive
 3. 按“Esc”键后执行:wq!保存并退出修改。
 
 ### 2.5 配置iptables服务
-在数据库实例安装的各节点上，执行以下命令打开iptables服务：
+在数据库实例安装的各节点上，执行以下命令打开iptables服务：  
 ```
 systemctl start iptables.service
 ```
 
 ### 2.6 设置字符集参数
-将各主机的字符集设置为相同的字符集。
-**步骤1**&emsp;vi打开profile文件。
+将各主机的字符集设置为相同的字符集。  
+**步骤1**&emsp;vi打开profile文件。  
 ```
 vi /etc/profile
 ```
@@ -85,15 +85,15 @@ source /etc/ locale.conf
 ```
 
 ### 2.7 设置时钟源
-该步骤要保证各时间点的时钟源同步，可以配置chrony或者ntpd时间同步。
-使用Chrony配置时间同步：
-
+该步骤要保证各时间点的时钟源同步，可以配置chrony或者ntpd时间同步。  
+使用Chrony配置时间同步：  
 **步骤1**&emsp;以root用户登录到待配置时间同步的所有服务器节点。
 **步骤2**&emsp;键入“chrony”并连按两次“Tab”键观察，检查是否安装了chrony。
 - 若显示chronyc和chronyd，则表示已经安装了chrony。继续执行后续步骤。
 - 若未显示则表示当前未安装chrony，执行以下命令进行安装。 
+```
 yum install chrony -y
-
+```
 **步骤3**&emsp;执行以下命令，修改客户端配置。
 1. 使用vi命令编辑客户端的/etc/chrony.conf文件：
 ```
@@ -109,8 +109,8 @@ systemctl restart chronyd
 ```
 chronyc sources -v
 ```
-查看时钟源列表，列表中有配置的时钟源服务器IP即可。
-关闭swap交换内存
+查看时钟源列表，列表中有配置的时钟源服务器IP即可。  
+关闭swap交换内存  
 **步骤5**&emsp;执行以下步骤，临时关闭交换内存。
 ```
 swapoff -a
@@ -210,8 +210,8 @@ systemctl restart sshd.service
 ```
 umask
 ```
-若回显小于等于0022，表示umask设置正确。 
-若回显大于0022，请执行后续步骤，设置umask。
+若回显小于等于0022，表示umask设置正确。  
+若回显大于0022，请执行后续步骤，设置umask。  
 **步骤2**&emsp;执行如下命令，打开bashrc文件。
 ```
 vi /etc/bashrc
