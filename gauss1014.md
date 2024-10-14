@@ -386,18 +386,18 @@ show 参数名;
 - 异常实例删除时，若出现删除异常的情况，可参考“任务中心 > 跳过任务”跳过执行失败的步骤，并联系客服删除存储设备上的备份数据。
 </font>
 
-**步骤1**&emsp;登录TPOPS管理界面，选择“实例管理”：
-**步骤2**&emsp;单击左侧目录“实例管理”，进入“实例列表”页面。
-**步骤3**&emsp;选择待删除的实例，单击“更多 > 删除实例”。
-**步骤4**&emsp;输入“delete”字样并勾选“已确认”。
-**步骤5**&emsp;单击“是”，删除实例。
+**步骤 1**&emsp;登录TPOPS管理界面，选择“实例管理”：  
+**步骤 2**&emsp;单击左侧目录“实例管理”，进入“实例列表”页面。  
+**步骤 3**&emsp;选择待删除的实例，单击“更多 > 删除实例”。  
+**步骤 4**&emsp;输入“delete”字样并勾选“已确认”。  
+**步骤 5**&emsp;单击“是”，删除实例。  
 
 ## 5 客户端工具安装
 ### 5.1 安装说明
 安装的客户端工具包含：
-**gs_dump/gs_dumpall,gs_ktool,gs_loader,gs_restore以及gsql**
+gs_dump/gs_dumpall,gs_ktool,gs_loader,gs_restore以及gsql
 ### 5.2 安装步骤
-**步骤1**&emsp;客户端解压缩到GSQL中
+**步骤 1**&emsp;客户端解压缩到GSQL中  
 FTP://22.122.18.86:/patch/gaussdb/831/
 **GaussDB-Kernel_505.1.0_Kylin_64bit_Gsql_Ditributed.tar.gz     分布式GSQL包**
 **GaussDB-Kernel_505.1.0_Kylin_64bit_Gsql_Centralized.tar.gz    集中式GSQL包**
