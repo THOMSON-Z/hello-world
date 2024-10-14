@@ -86,14 +86,14 @@ source /etc/ locale.conf
 ### 2.7 设置时钟源
 该步骤要保证各时间点的时钟源同步，可以配置chrony或者ntpd时间同步。  
 使用Chrony配置时间同步：  
-**步骤 1**&emsp;以root用户登录到待配置时间同步的所有服务器节点。
-**步骤 2**&emsp;键入“chrony”并连按两次“Tab”键观察，检查是否安装了chrony。
+**步骤 1**&emsp;以root用户登录到待配置时间同步的所有服务器节点。  
+**步骤 2**&emsp;键入“chrony”并连按两次“Tab”键观察，检查是否安装了chrony。  
 - 若显示chronyc和chronyd，则表示已经安装了chrony。继续执行后续步骤。
 - 若未显示则表示当前未安装chrony，执行以下命令进行安装。 
 ```
 yum install chrony -y
 ```
-**步骤 3**&emsp;执行以下命令，修改客户端配置。
+**步骤 3**&emsp;执行以下命令，修改客户端配置。  
 1. 使用vi命令编辑客户端的/etc/chrony.conf文件：
 ```
 vi /etc/chrony.conf
@@ -104,17 +104,17 @@ vi /etc/chrony.conf
 ```
 systemctl restart chronyd
 ```
-**步骤 4**&emsp;执行以下命令，配置后检查。
+**步骤 4**&emsp;执行以下命令，配置后检查。  
 ```
 chronyc sources -v
 ```
 查看时钟源列表，列表中有配置的时钟源服务器IP即可。  
 关闭swap交换内存  
-**步骤 5**&emsp;执行以下步骤，临时关闭交换内存。
+**步骤 5**&emsp;执行以下步骤，临时关闭交换内存。  
 ```
 swapoff -a
 ```
-**步骤 6**&emsp;验证swap是否关闭：
+**步骤 6**&emsp;验证swap是否关闭：  
 ```
 free -g
 ```
