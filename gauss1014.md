@@ -319,7 +319,7 @@ source /home/Ruby/gauss_env_file
 **步骤 7**&emsp;选择本次新建的实例，单击“重启实例”。  
 **步骤 8**&emsp;在弹出的窗口中输入“confirm”字样并勾选确认框。  
 **步骤 9**&emsp;单击“是”，重启实例。  
-重启过程中，实例将不可用。重启后实例会自动释放内存中的缓存，请在业务低峰期 进行重启，避免对高峰期业务造成影响。  
+&emsp;&emsp;重启过程中，实例将不可用。重启后实例会自动释放内存中的缓存，请在业务低峰期 进行重启，避免对高峰期业务造成影响。  
 **步骤 10**&emsp;验证修改后的参数值。  
 - 以Ruby用户登录任意一台数据库服务器  
 ```
@@ -349,8 +349,14 @@ source /home/Ruby/.bashrc
 source /home/Ruby/gauss_env_file
 ```
 **步骤 4**&emsp;参考以下gs_guc命令，修改GUC参数值：  
-集中式：gs_guc set -Z datanode -N all -I all -c "参数名=参数值"  
-分布式：gs_guc set -Z datanode -Z coordinator -N all -I all -c "参数名=参数值"  
+集中式：  
+```
+gs_guc set -Z datanode -N all -I all -c "参数名=参数值"  
+```
+分布式：  
+```
+gs_guc set -Z datanode -Z coordinator -N all -I all -c "参数名=参数值"  
+```
 **步骤 5**&emsp;登录TPOPS管理界面，选择“实例管理”：  
 **步骤 6**&emsp;单击左侧目录“实例管理”，进入“实例列表”页面。  
 **步骤 7**&emsp;选择本次新建的实例，单击“重启实例”。  
