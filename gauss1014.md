@@ -775,10 +775,12 @@ cd Monitor-Agent-*
 **步骤 5**&emsp;执行以下命令，运行install.sh脚本。  
 安装脚本能够自动识别当前机器已部署的组件：  
 以下部分需要手动输入信息：  
+```
 please input database ip:port [default: 127.0.0.1:30100]:(输入三台元数据库IP地址:端口号，使用英文逗号隔开)  
 please input platform drs user[default:drs]:  (输入回车，选择默认用户drs)；  
 please input platform drs password:     (输入元数据库drs用户登录密码，即安装DRS-Node时install.conf配置的metaDB_drs_password)  
-Retype password:    (再次输入元数据库drs用户登录密码)   
+Retype password:    (再次输入元数据库drs用户登录密码)
+```
 ```
 sh install.sh
 ```
