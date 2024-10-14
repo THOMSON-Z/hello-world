@@ -922,19 +922,23 @@ gsql -d <database-name> -p <port-number> -U <user-name> -W <password> -r
 gsql -V
 ```
 进入gsql连接数据库后常用命令：  
+```
 \l :列出所有数据库的名称、所有者、字符集编码以及使用权限；  
 \dt：列出当前数据库的所有用户表；命令后面加表名可以确认该表是否存在；  
 \d+：列出当前数据库的所有表，视图，序列；命令后面加对象名可以确认该表是否存在；  
-\i sql语句文件：执行一个SQL脚本文件。  
+\i sql语句文件：执行一个SQL脚本文件。
+```
 #### 11.2.2 gs_om
 数据库维护工具；  
+```
 启动整个集群数据库实例：gs_om -t start  
 停止整个集群数据库实例：gs_om -t stop  
 强制停止整个集群数据库实例：gs_om stop -mi  
 启动集群中的单个数据库:gs_om -t start -h <hostname or hostip>  
 停止集群中的单个数据库实例:gs_om -t stop -h <hostname or hostip>  
 重启数据库实例：gs_om -t restart  
-查询数据库实例状态：gs_om -t status -h <hostname or hostip>  
+查询数据库实例状态：gs_om -t status -h <hostname or hostip>
+```
 #### 11.2.3 cm_ctl
 统一集群管理工具；  
 查询集群状态：  
